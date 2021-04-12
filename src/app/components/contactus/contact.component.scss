@@ -1,0 +1,57 @@
+.headerContact
+{
+  margin-top: 55px;
+  height: 50px;
+  background-color: #1274c1;
+  padding-left: 100px;
+  padding-top: 11px;
+  font-size: 18px;
+  color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  z-index: 2;
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+}
+
+.button {
+  margin:2rem auto;
+  display: block;
+  height:50px;
+  width:300px;
+  padding:2px;
+  text-decoration: none;
+  font-weight:300;
+  overflow:hidden;
+  border-radius:30px;
+  transition: all .2s linear;
+  background: -webkit-linear-gradient(-45deg, rgba(38,43,193,1) 1%,rgba(214,85,128,1) 100%); /* Chrome10+,Safari5.1+ */
+
+  &:hover {
+    background: -webkit-linear-gradient(75deg, rgba(38,43,193,1) 1%,rgba(214,85,128,1) 100%); /* Chrome10+,Safari5.1+ */
+  }
+}
+
+.button-text {
+  height: calc(100% - 1rem);
+  display: block;
+  border-radius: 28px;
+  text-align: center;
+  padding: 0.8rem 4rem;
+  font-size: 1.7rem;
+  color: #fff;
+
+}
+#contactus
+{
+  border-radius: 7px;
+  box-shadow: 1px 1px 16px rgb(0 0 0 /30%);
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+input,textarea
+{
+  margin-bottom: 15px;
+  border-radius: 20px;
+}
