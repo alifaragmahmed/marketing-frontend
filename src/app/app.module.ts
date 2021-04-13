@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
-import {FeatureComponent} from './components/feature/feature.component';
-import {ContactComponent} from './components/contactus/contact.component';
+import { CustomerIndexComponent } from './components/customer/customer-index/customer-index.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +14,7 @@ import {ContactComponent} from './components/contactus/contact.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    FeatureComponent,
-    ContactComponent
+    CustomerIndexComponent,
   ],
   imports: [
     BrowserModule,
