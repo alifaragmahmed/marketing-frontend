@@ -13,3 +13,21 @@ body {
 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
+
+.mini-avatar {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 5em;
+  margin: 5px;
+}
+
+.xmini-avatar {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 5em;
+  margin: 5px;
+}

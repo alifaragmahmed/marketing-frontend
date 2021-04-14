@@ -1,0 +1,64 @@
+<div class="w3-block w3-white w3-padding shadow">
+  <div class="w3-large text-right">
+    <button class="fa fa-users w3-teal w3-center btn w3-tiny" style="width: 30px;height: 30px;border-radius: 5em;" ></button>
+    Customers
+  </div>
+</div>
+
+
+<div class="w3-row">
+
+    <!-- filter sidebar -->
+  <div class="col-lg-2" style="padding: 0px!important" >
+    <ul class="w3-ul w3-block">
+
+      <li class="text-center w3-large" style="background-color: #fafafa;" >
+        <b>{{ "فلترة العملاء" }}</b>
+      </li>
+
+      <li class="w3-light-gray w3-padding" >
+        <input type="text" class="w3-input w3-round-xlarge w3-block" placeholder="البحث" >
+      </li>
+
+      <li class="w3-padding" >
+        <a class="w3-text-teal" href="#" >
+          <b>
+            <i class="fa fa-angle-double-left"></i> ملخص العملاء
+          </b>
+        </a>
+        <div class="w3-padding w3-display-container">
+          <button class="fa fa-id-badge xmini-avatar btn w3-teal w3-tiny"></button> اجمالى العملاء
+
+          <div class="w3-left w3-padding">
+            <b>{{ data.data.length }}</b>
+          </div>
+        </div>
+      </li>
+
+      <li class="w3-padding" >
+        <a class="w3-text-teal" href="#" >
+          <b>
+            <i class="fa fa-angle-double-left"></i> الادوات
+          </b>
+        </a>
+        <div class="w3-padding w3-display-container">
+          <button class="fa fa-id-badge xmini-avatar btn w3-teal w3-tiny"></button> اجمالى العملاء
+
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="col-lg-10" style="padding: 0px!important" >
+
+    <div class="w3-block customer-container w3-padding" #customerContainer >
+
+      <app-customer-item></app-customer-item>
+
+    </div>
+
+
+  </div>
+
+</div>

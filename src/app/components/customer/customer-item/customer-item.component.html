@@ -1,0 +1,55 @@
+
+
+<div class="w3-block w3-white shadow w3-round w3-padding customer-item w3-display-container">
+  <div class="media w3-display-container" style="width: 90%" >
+    <div class="media-left">
+      <a href="#">
+        <button class="w3-circle avatar w3-xxlarge btn w3-teal"  >
+          م
+        </button>
+      </a>
+    </div>
+    <div class="media-body w3-display-container">
+      <div class="media-heading w3-xlarge">{{ customer.name }}</div>
+
+      <b class="w3-text-teal" >{{ customer.category? customer.category.name : "" }}</b>
+      <br>
+      <a href="#" (click)="toggleMoreDetail()" >
+        <b class="w3-text-blue" >المزيد</b>
+      </a>
+
+      <br>
+      <div class="w3-block more-detail w3-padding" #moreDetail >
+        <ul class="w3-ul" >
+          <li *ngIf="customer.phone" >
+            <b><i class="fa fa-phone w3-text-teal" ></i> {{ customer.phone }}</b>
+          </li>
+          <li *ngIf="customer.whatsapp" >
+            <b><i class="fa fa-whatsapp w3-text-teal" ></i> {{ customer.whatsapp }}</b>
+          </li>
+          <li *ngIf="customer.email" >
+            <b><i class="fa fa-envelope w3-text-teal" ></i> {{ customer.email }}</b>
+          </li>
+          <li  >
+            <button class="fa fa-edit mini-avatar shadow btn w3-orange"></button>
+            <button class="fa fa-trash mini-avatar shadow btn w3-red"></button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="w3-display-topleft">
+
+      <button class="fa fa-envelope mini-avatar shadow btn w3-indigo"></button>
+
+      <button class="fa fa-whatsapp mini-avatar shadow btn w3-green"></button>
+
+      <button class="fa fa-phone mini-avatar shadow btn w3-teal"></button>
+
+    </div>
+  </div>
+
+  <div class="w3-display-topleft w3-padding">
+    <div id="qrcode" ></div>
+  </div>
+</div>

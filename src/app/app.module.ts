@@ -7,6 +7,8 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { CustomerIndexComponent } from './components/customer/customer-index/customer-index.component';
+import { AvatarComponent } from './components/layout/avatar/avatar.component';
+import { CustomerItemComponent } from './components/customer/customer-item/customer-item.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { CustomerIndexComponent } from './components/customer/customer-index/cus
     NavbarComponent,
     FooterComponent,
     CustomerIndexComponent,
+    AvatarComponent,
+    CustomerItemComponent,
   ],
   imports: [
     BrowserModule,
