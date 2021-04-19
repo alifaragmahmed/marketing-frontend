@@ -1,60 +1,157 @@
-<div class="w3-block w3-white w3-padding shadow">
+<div class="w3-block w3-light-gray w3-padding shadow">
   <div class="w3-large text-right">
-    <button class="fa fa-users w3-teal w3-center btn w3-tiny" style="width: 30px;height: 30px;border-radius: 5em;" ></button>
-    Customers
+    <button class="fa fa-users w3-teal w3-center xmini-avatar btn w3-tiny"
+      style="width: 30px;height: 30px;border-radius: 5em;"></button>
+      العملاء
   </div>
 </div>
 
 
 <div class="w3-row">
 
-    <!-- filter sidebar -->
-  <div class="col-lg-2" style="padding: 0px!important" >
+  <!-- filter sidebar -->
+  <div class="col-lg-2 w3-white filter-menu table-responsive" #filterMenu id="filter-menu" style="padding: 0px!important">
     <ul class="w3-ul w3-block">
 
-      <li class="text-center w3-large" style="background-color: #fafafa;" >
+      <li class="text-center w3-large" style="background-color: #fafafa;">
         <b>{{ "فلترة العملاء" }}</b>
       </li>
 
-      <li class="w3-light-gray w3-padding" >
-        <input type="text" class="w3-input w3-round-xlarge w3-block" placeholder="البحث" >
+      <li class="w3-light-gray w3-padding">
+        <input type="text" class="w3-input w3-round-xlarge w3-block" (change)="get(true)" [(ngModel)]="filter.search"
+          placeholder="البحث">
       </li>
 
-      <li class="w3-padding" >
-        <a class="w3-text-teal" href="#" >
+      <li class="w3-padding">
+        <a class="w3-text-teal" href="#" (click)="toggle('detail-section')">
           <b>
             <i class="fa fa-angle-double-left"></i> ملخص العملاء
           </b>
         </a>
-        <div class="w3-padding w3-display-container">
-          <button class="fa fa-id-badge xmini-avatar btn w3-teal w3-tiny"></button> اجمالى العملاء
+        <div class="w3-display-container detail-section">
+          <button class="fa fa-id-badge xmini-avatar btn w3-teal"></button>
+          <b>اجمالى العملاء</b>
 
           <div class="w3-left w3-padding">
-            <b>{{ data.data.length }}</b>
+            <b>{{ response.total }}</b>
+          </div>
+        </div>
+        <div class="w3-display-container detail-section" *ngIf="selectedResources.size() > 0" >
+          <button class="fa fa-check-square xmini-avatar btn w3-teal"></button>
+          <b>اجمالى العملاء المحددون</b>
+
+          <div class="w3-left w3-padding">
+            <b>{{ selectedResources.size() }}</b>
           </div>
         </div>
       </li>
 
-      <li class="w3-padding" >
-        <a class="w3-text-teal" href="#" >
+      <li class="w3-padding">
+        <a class="w3-text-teal" href="#" (click)="toggle('tool-section')">
           <b>
             <i class="fa fa-angle-double-left"></i> الادوات
           </b>
         </a>
-        <div class="w3-padding w3-display-container">
-          <button class="fa fa-id-badge xmini-avatar btn w3-teal w3-tiny"></button> اجمالى العملاء
+        <div class="tool-section">
+          <a class="w3-display-container w3-block" href="#" (click)="selectedAll()" *ngIf="!isSelectAll" >
+            <button class="fa fa-check-square-o xmini-avatar btn w3-teal" style="margin: 3px"></button>
+            <b>تحديد الكل</b>
+          </a>
+          <a class="w3-display-container w3-block" href="#" (click)="deSelectedAll()" *ngIf="isSelectAll" >
+            <button class="fa fa-hand-pointer-o xmini-avatar btn w3-green" style="margin: 3px"></button>
+            <b>الغاء تحديد الكل</b>
+          </a>
+          <a class="w3-display-container w3-block" (click)="toggleSelectMode()" href="#">
+            <button
+            class="fa fa-magic xmini-avatar btn {{ selectMode? 'w3-green w3-animate-zoom' : 'w3-teal' }}"
+            style="margin: 3px"></button>
+            <b class="{{ selectMode? 'w3-text-green' : 'w3-text-teal' }}" >التحديد السريع</b>
+          </a>
+          <a class="w3-display-container w3-block" (click)="expandAll()" href="#">
+            <button class="fa xmini-avatar btn {{ isExpanded? 'w3-green fa-toggle-on' : 'w3-teal fa-toggle-off' }}" style="margin: 3px"></button>
+            <b>عرض المزيد للكل</b>
+          </a>
+          <a class="w3-display-container w3-block" (click)="setPageLength()" href="#">
+            <button class="fa fa-ticket xmini-avatar btn w3-teal" style="margin: 3px"></button>
+            <b>عدد العملاء فى الصفحة</b>
+          </a>
+          <a class="w3-display-container w3-block" href="#" (click)="$('#customerModal').modal('show')">
+            <button class="fa fa-plus xmini-avatar btn w3-teal" style="margin: 3px"></button>
+            <b>أضافة عميل</b>
+          </a>
+          <a class="w3-display-container w3-block" href="#" (click)="import()">
+            <button class="fa fa-file-excel-o xmini-avatar btn w3-teal" style="margin: 3px"></button>
+            <b>أستيراد من اكسيل</b>
+          </a>
+          <a class="w3-display-container w3-block" *ngIf="selectedResources.size() > 0" href="#">
+            <button class="fa fa-envelope xmini-avatar btn w3-teal" style="margin: 3px"></button>
+            <b>ارسال اميل</b>
+          </a>
+          <a class="w3-display-container w3-block" (click)="removeSelected()" *ngIf="selectedResources.size() > 0" href="#">
+            <button class="fa fa-trash xmini-avatar btn w3-red" style="margin: 3px"></button>
+            <b>حذف المحدد</b>
+          </a>
+        </div>
+      </li>
 
+      <li class="w3-padding w3-display-container">
+        <a class="w3-text-teal" href="#" (click)="toggle('status-section')">
+          <b>
+            <i class="fa fa-angle-double-left"></i> الحالة
+          </b>
+        </a>
+        <div class="w3-display-topleft">
+          <i class="fa fa-cogs w3-text-teal btn" (click)="$('#statusModal').modal('show')" ></i>
+        </div>
+        <div class="w3-display-container status-section">
+          <ng-container *ngFor="let item of status">
+            <mat-checkbox [checked]="selectedStatus.has(item.id)" (change)="toggleFilter(item, 'STATUS')">
+              <b style="padding: 4px">{{ item.name }}</b>
+            </mat-checkbox>
+            <br>
+          </ng-container>
+        </div>
+      </li>
+
+      <li class="w3-padding w3-display-container">
+        <a class="w3-text-teal" href="#" (click)="toggle('category-section')">
+          <b>
+            <i class="fa fa-angle-double-left"></i> الفئة
+          </b>
+        </a>
+        <div class="w3-display-topleft">
+          <i class="fa fa-cogs w3-text-teal btn" (click)="$('#categoryModal').modal('show')" ></i>
+        </div>
+        <div class="w3-display-container category-section">
+          <ng-container *ngFor="let item of categories">
+            <mat-checkbox [checked]="selectedCategory.has(item.id)" (change)="toggleFilter(item, 'CATEGORY')">
+              <b style="padding: 4px">{{ item.name }}</b>
+            </mat-checkbox>
+            <br>
+          </ng-container>
         </div>
       </li>
 
     </ul>
   </div>
 
-  <div class="col-lg-10" style="padding: 0px!important" >
+  <div class="col-lg-10" style="padding: 0px!important">
 
-    <div class="w3-block customer-container w3-padding" #customerContainer >
+    <div class="w3-block customer-container w3-padding" #customerContainer>
 
-      <app-customer-item></app-customer-item>
+      <div class="w3-center" *ngIf="loading">
+        <i class="fa fa-spinner fa-spin w3-text-teal w3-large"></i>
+        <br>
+        <b>من فضلك انتظر</b> ..
+      </div>
+      <ng-container *ngFor="let customer of response.data index as i">
+        <app-customer-item *ngIf="!loading"
+        [customer]="customer"
+        [reload]="reload"
+        [categories]="categories"
+        [status]="status"
+        [selectedResources]="selectedResources" ></app-customer-item>
+      </ng-container>
 
     </div>
 
@@ -62,3 +159,13 @@
   </div>
 
 </div>
+
+
+<app-import-excel [title]="title" [templateUrl]="getExcelFileUrl()" [apiUrl]="getExcelFileApi()" [action]="reload">
+</app-import-excel>
+
+<app-customer-add [reload]="reload" [customers]="[]" ></app-customer-add>
+
+<app-category [data]="categories" [reload]="reloadCategory" ></app-category>
+
+<app-status [data]="status" [reload]="reloadStatus" ></app-status>

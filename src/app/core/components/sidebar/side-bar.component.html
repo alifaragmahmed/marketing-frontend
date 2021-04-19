@@ -1,0 +1,33 @@
+<aside class="main-sidebar material-shadow">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar" style="height: auto;">
+    <!-- Sidebar user panel -->
+    <div class="user-panel">
+      <div class="pull-left image">
+        <img src="/assets/img/avatar.png" class="img-circle" alt="User Image">
+      </div>
+      <div class="pull-left info">
+        <p>{{ user.name }}</p>
+        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+      </div>
+    </div>
+    <!-- sidebar menu: : style can be found in sidebar.less -->
+    <ul class="sidebar-menu tree" data-widget="tree">
+      <li class="header">MAIN NAVIGATION</li>
+
+      <li   >
+        <a  href="#" routerLink="/" >
+          <i class="fa fa-address-book"></i> <span>{{ "customers" | trans }}</span>
+        </a>
+      </li>
+      <!--
+      <li>
+        <a href="#">
+          <i class="fa fa-th"></i> <span>new link</span>
+        </a>
+      </li>
+      -->
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>

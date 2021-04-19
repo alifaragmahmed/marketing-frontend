@@ -1,0 +1,109 @@
+<div class="modal fade" id="customerModal{{ customers.length > 0? customers[0].id : '' }}" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">أضافة عميل</h4>
+      </div>
+      <div class="modal-body" *ngIf="!isSubmit" >
+        <div class="table-responsive">
+          <table class="">
+            <tr class="w3-teal w3-padding" >
+              <th>#</th>
+              <th>الاسم</th>
+              <th>الفئة</th>
+              <th>الحالة</th>
+              <th>الهاتف</th>
+              <th>الوتس</th>
+              <th>الاميل</th>
+              <th>الفيس</th>
+              <th>يوتيوب</th>
+              <th>تويتر</th>
+              <th>لنكدان</th>
+              <th>انستجرام</th>
+              <th>موقع</th>
+              <th>ملاحظات</th>
+              <th>صورة</th>
+            </tr>
+
+            <tr *ngFor="let customer of customers index as i" >
+              <td>
+                {{ i + 1 }}
+              </td>
+              <td>
+                <input type="text" [(ngModel)]="customer.name"  >
+              </td>
+              <td>
+                <select class="" [(ngModel)]="customer.category_id" style="width: 80px" >
+                  <option *ngFor="let item of categories" [value]="item.id">{{ item.name }}</option>
+                </select>
+              </td>
+              <td>
+                <select class="" [(ngModel)]="customer.status_id" style="width: 80px" >
+                  <option *ngFor="let item of status" [value]="item.id">{{ item.name }}</option>
+                </select>
+              </td>
+              <td>
+                <input type="text" [(ngModel)]="customer.phone" >
+              </td>
+              <td>
+                <input type="text" [(ngModel)]="customer.whatsapp" >
+              </td>
+              <td>
+                <input type="email" [(ngModel)]="customer.email" >
+              </td>
+              <td>
+                <input type="url" [(ngModel)]="customer.facebook" >
+              </td>
+              <td>
+                <input type="url" [(ngModel)]="customer.youtube" >
+              </td>
+              <td>
+                <input type="url" [(ngModel)]="customer.twitter" >
+              </td>
+              <td>
+                <input type="url" [(ngModel)]="customer.linkedin" >
+              </td>
+              <td>
+                <input type="url" [(ngModel)]="customer.instagram" >
+              </td>
+              <td>
+                <input type="url" [(ngModel)]="customer.website" >
+              </td>
+              <td>
+                <input type="text" [(ngModel)]="customer.notes" >
+              </td>
+              <td>
+                <input type="file" (change)="customLoadFile($event, 'image', customer)" >
+              </td>
+            </tr>
+          </table>
+        </div>
+        <br>
+        <button class="w3-teal" (click)="add()" mat-raised-button >
+          <i class="fa fa-plus" ></i>
+        </button>
+      </div>
+      <div class="modal-body w3-center w3-padding" *ngIf="isSubmit" >
+        <i class="fa fa-spin fa-spinner w3-large w3-text-teal"></i>
+      </div>
+      <div class="modal-footer">
+        <button
+        type="button"
+        style="margin: 3px"
+        mat-raised-button
+        class="btn btn-default" data-dismiss="modal">اعلاق</button>
+
+        <button
+        type="button"
+        style="margin: 3px"
+        [disabled]="isSubmit"
+        (click)="sendAllCustomers()"
+        mat-raised-button class="w3-teal">
+          <span *ngIf="!isSubmit" >حفظ</span>
+          <span *ngIf="isSubmit" class="fa fa-spin fa-spinner" ></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
