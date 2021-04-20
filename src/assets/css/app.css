@@ -7,6 +7,9 @@
 body, html {
   background-color: #fafafa;
   overflow: hidden;
+  height: 100%;
+  background-image: url(/assets/img/background.png);
+  background-size: auto;
 }
 
 .material-shadow,
@@ -41,9 +44,8 @@ body, html {
   opacity: none!important;
 }
 .login-background {
-  background-image: url(/assets/img/Binder3.jpg)!important;
-  background-size: cover!important;
-  background-repeat: no-repeat!important;
+  background-image: url(/assets/img/background.png);
+  background-size: auto;
 }
 
 
@@ -311,4 +313,22 @@ body {
 
 .pull-right{
 	float: left !important;
+}
+
+
+
+.message-item {
+  overflow: hidden;
+  height: 200px;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  background-color: white;
+}
+
+.message-item:hover {
+  background-color: lightgray;
+}
+
+.message-content {
+  transform: scale(0.5) translate(50%, -50%);
 }

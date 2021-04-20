@@ -53,6 +53,10 @@
           </b>
         </a>
         <div class="tool-section">
+          <a class="w3-display-container w3-block" href="#" (click)="sort('created_at DESC')"   >
+            <button class="fa fa-first-order xmini-avatar btn w3-teal" style="margin: 3px"></button>
+            <b>رتب بالاحدث</b>
+          </a>
           <a class="w3-display-container w3-block" href="#" (click)="selectedAll()" *ngIf="!isSelectAll" >
             <button class="fa fa-check-square-o xmini-avatar btn w3-teal" style="margin: 3px"></button>
             <b>تحديد الكل</b>
@@ -83,7 +87,7 @@
             <button class="fa fa-file-excel-o xmini-avatar btn w3-teal" style="margin: 3px"></button>
             <b>أستيراد من اكسيل</b>
           </a>
-          <a class="w3-display-container w3-block" *ngIf="selectedResources.size() > 0" href="#">
+          <a class="w3-display-container w3-block" (click)="sendMail()" *ngIf="selectedResources.size() > 0" href="#">
             <button class="fa fa-envelope xmini-avatar btn w3-teal" style="margin: 3px"></button>
             <b>ارسال اميل</b>
           </a>
@@ -137,7 +141,7 @@
 
   <div class="col-lg-10" style="padding: 0px!important">
 
-    <div class="w3-block customer-container w3-padding" #customerContainer>
+    <div class="w3-block customer-container" style="padding: 5px" #customerContainer>
 
       <div class="w3-center" *ngIf="loading">
         <i class="fa fa-spinner fa-spin w3-text-teal w3-large"></i>
@@ -150,6 +154,7 @@
         [reload]="reload"
         [categories]="categories"
         [status]="status"
+        [messages]="messages"
         [selectedResources]="selectedResources" ></app-customer-item>
       </ng-container>
 
@@ -164,8 +169,10 @@
 <app-import-excel [title]="title" [templateUrl]="getExcelFileUrl()" [apiUrl]="getExcelFileApi()" [action]="reload">
 </app-import-excel>
 
-<app-customer-add [reload]="reload" [customers]="[]" ></app-customer-add>
+<app-customer-add [reload]="reload" [customers]="[]" [categories]="categories" [status]="status" ></app-customer-add>
 
 <app-category [data]="categories" [reload]="reloadCategory" ></app-category>
 
 <app-status [data]="status" [reload]="reloadStatus" ></app-status>
+
+<app-select-message [customers]="selectedResources" [messages]="messages" ></app-select-message>

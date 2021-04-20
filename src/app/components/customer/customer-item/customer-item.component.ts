@@ -3,6 +3,7 @@ import { Cache } from 'src/app/shared/cache';
 import { HashTable } from 'angular-hashtable';
 import { Crud } from '../../../shared/helpers/crud';
 import { GlobalService } from '../../../shared/services/global.service';
+import { Helper } from '../../../shared/helper';
 
 @Component({
   selector: 'app-customer-item',
@@ -11,40 +12,40 @@ import { GlobalService } from '../../../shared/services/global.service';
 })
 export class CustomerItemComponent extends Crud implements OnInit, AfterViewInit {
 
-  @Input() customer: any = {
-    name: "مستر عبد الغنى",
-    category: {
-      name: "مدرس"
-    },
-    code: 56565,
-    phone: '01123904214',
-    email: 'alifaragmahmed@gmail.com',
-    whatsapp: '01123904214',
-  };
-
-  doc: any = document;
-  $: any = $;
+  @Input() customer: any = {};
   @Input('selected') selected = false;
   @Input() reload: any;
   @Input('selectedResources') selectedResources: HashTable<any, any>;
-
   @Input() categories: any = [];
   @Input() status: any = [];
-
+  @Input() messages: any = [];
   @ViewChild('moreDetail') moreDetail: ElementRef;
+
+  doc: any = document;
+  $: any = $;
+  color: any;
 
   constructor(public service: GlobalService) {
     super(service);
     this.baseApiUrl = "customers";
 
+    if (!this.color)
+      this.color = Helper.randColor();
   }
 
 
   ngOnInit(): void {
-
   }
 
   ngAfterViewInit() {
+    this.initQrcode();
+  }
+
+  /**
+   * init qrcode
+   *
+   */
+  initQrcode() {
     var qrcode = new this.doc.QRCode("qrcode"+this.customer.id, {
         text: this.customer.code,
         width: 60,
@@ -55,54 +56,57 @@ export class CustomerItemComponent extends Crud implements OnInit, AfterViewInit
     });
   }
 
+  /**
+   * view more details of customer
+   *
+   */
   toggleMoreDetail() {
     console.log(this.moreDetail);
     this.$(this.moreDetail.nativeElement).slideToggle(300);
   }
 
+  /**
+   * select the customer
+   *
+   */
   select() {
     this.customer.selected = true;
     this.selectedResources.put(this.customer.id, this.customer);
   }
 
+  /**
+   * init mouse hover listner
+   *
+   */
   mouseHover(e) {
     let isSelectMode = Cache.get("selectMode");
 
     if (isSelectMode == 1) {
       this.select();
     }
-    /*else if (isSelectMode == 0)  {
-      //this.customer.selected = false;
-    }*/
   }
 
+
+  /**
+   * send message to customer api
+   *
+   */
   sendWhatsapp()  {
-    let message =
-   " 🌹✨الّلهُمَّ صَلِّ عَلی" +
-"🍁.•°``°•.🕌¸.•°``°•.🍁" +
-"🍁( 🌷  ‌‌ مُحَمَّدٍ 🌷  )🍁" +
-" 🍁`•.¸🍂🍂🍂 ¸.•`🍁 " +
-"    🍁    °•.¸  ¸.  وال محمد🌾🌹🌹اللهمَّﷺ🌾🌹صَلِّﷺ🌺وَسَـــلِّمْﷺ🌷وَبَارِكﷺْ🌻علىﷺنَبِيِّنَـــا💐🌹ﷺمُحمَّدﷺ-🌹🌺🕌🍁🌷🍁🌷‏​​​       ‏​​ ‏​​‏​     .• °``°•.¸.•°``°•.🌷" +
-"      (  🍁  محمد 🍁)   "       +
-"       `•.    .ﷺ.";
-    let url = "https://api.whatsapp.com/send/?phone=2"+this.customer.whatsapp+"&text="+message+"&app_absent=0";
-
-    let myWindow = window.open(url, "", "width=200,height=100");
-    //
-    //myWindow.document.body.append("<script>window.onload = function(){ window.close(); };</script>");
-    myWindow.onload = function(){
-      var self: any = this;
-      setTimeout(() => {
-        self.close();
-        alert();
-      }, 1000);
-    };
+    this.$('#whatsappModal').modal('show');
   }
 
+  /**
+   * call to customer api
+   *
+   */
   call() {
     window.location.href = "tel:" + this.customer.phone;
   }
 
+  /**
+   * show edit modal for customer
+   *
+   */
   edit() {
     this.$('#customerModal'+this.customer.id).modal('show');
   }

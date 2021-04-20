@@ -1,0 +1,45 @@
+<div class="modal fade" id="messageModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">أضافة رسالة</h4>
+      </div>
+      <div class="modal-body" *ngIf="!isSubmit" >
+        <div class="w3-padding w3-center">
+          وتس <mat-slide-toggle [(ngModel)]="type" color="primary" (change)="toggleType()" ></mat-slide-toggle>
+        </div>
+        <br>
+        <!-- This container will become the editable. -->
+        <textarea name="editor1" style="display: none;" id="editor1" [innerHTML]="resource.message" *ngIf="!type" >
+          <p>This is the initial editor content.</p>
+        </textarea>
+
+        <textarea class="form-control" [(ngModel)]="resource.message" *ngIf="type" ></textarea>
+
+
+
+      </div>
+      <div class="modal-body w3-center w3-padding" *ngIf="isSubmit" >
+        <i class="fa fa-spin fa-spinner w3-large w3-text-teal"></i>
+      </div>
+      <div class="modal-footer">
+        <button
+        type="button"
+        style="margin: 3px"
+        mat-raised-button
+        class="btn btn-default" data-dismiss="modal">اعلاق</button>
+
+        <button
+        type="button"
+        style="margin: 3px"
+        [disabled]="isSubmit"
+        (click)="send(resource)"
+        mat-raised-button class="w3-teal">
+          <span *ngIf="!isSubmit" >حفظ</span>
+          <span *ngIf="isSubmit" class="fa fa-spin fa-spinner" ></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

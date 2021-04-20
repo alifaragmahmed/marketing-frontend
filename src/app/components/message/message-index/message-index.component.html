@@ -1,0 +1,125 @@
+<div class="w3-block w3-light-gray w3-padding shadow">
+  <div class="w3-large text-right">
+    <button class="fa fa-users w3-teal w3-center xmini-avatar btn w3-tiny"
+      style="width: 30px;height: 30px;border-radius: 5em;"></button>
+      الرسائل
+  </div>
+</div>
+
+
+<div class="w3-row">
+
+  <!-- filter sidebar -->
+  <div class="col-lg-2 w3-white filter-menu table-responsive" #filterMenu id="filter-menu" style="padding: 0px!important">
+    <ul class="w3-ul w3-block">
+
+      <li class="text-center w3-large" style="background-color: #fafafa;">
+        <b>{{ "فلترة الرسائل" }}</b>
+      </li>
+
+      <li class="w3-light-gray w3-padding">
+        <input type="text" class="w3-input w3-round-xlarge w3-block" (change)="get(true)" [(ngModel)]="filter.search"
+          placeholder="البحث">
+      </li>
+
+      <li class="w3-padding">
+        <a class="w3-text-teal"   (click)="toggle('detail-section')">
+          <b>
+            <i class="fa fa-angle-double-left"></i> ملخص الرسائل
+          </b>
+        </a>
+        <div class="w3-display-container detail-section">
+          <button class="fa fa-id-badge xmini-avatar btn w3-teal"></button>
+          <b>اجمالى الرسائل</b>
+
+          <div class="w3-left w3-padding">
+            <b>{{ response.total }}</b>
+          </div>
+        </div>
+
+      </li>
+
+      <li class="w3-padding">
+        <a class="w3-text-teal"   (click)="toggle('tool-section')">
+          <b>
+            <i class="fa fa-angle-double-left"></i> الادوات
+          </b>
+        </a>
+        <div class="tool-section">
+          <a class="w3-display-container w3-block" (click)="setPageLength()"  >
+            <button class="fa fa-ticket xmini-avatar btn w3-teal" style="margin: 3px"></button>
+            <b>عدد الرسائل فى الصفحة</b>
+          </a>
+          <a class="w3-display-container w3-block"   (click)="create()">
+            <button class="fa fa-plus xmini-avatar btn w3-teal" style="margin: 3px"></button>
+            <b>أضافة رسالة</b>
+          </a>
+        </div>
+      </li>
+
+      <li class="w3-padding w3-display-container hidden">
+        <a class="w3-text-teal"   (click)="toggle('status-section')">
+          <b>
+            <i class="fa fa-angle-double-left"></i> الحالة
+          </b>
+        </a>
+        <div class="w3-display-topleft">
+          <i class="fa fa-cogs w3-text-teal btn" (click)="$('#statusModal').modal('show')" ></i>
+        </div>
+        <div class="w3-display-container status-section">
+          <ng-container *ngFor="let item of status">
+            <mat-checkbox [checked]="selectedStatus.has(item.id)" (change)="toggleFilter(item, 'STATUS')">
+              <b style="padding: 4px">{{ item.name }}</b>
+            </mat-checkbox>
+            <br>
+          </ng-container>
+        </div>
+      </li>
+
+
+    </ul>
+  </div>
+
+  <div class="col-lg-10" style="padding: 0px!important">
+
+    <div class="w3-block customer-container w3-padding" #customerContainer>
+
+      <div class="w3-center" *ngIf="loading">
+        <i class="fa fa-spinner fa-spin w3-text-teal w3-large"></i>
+        <br>
+        <b>من فضلك انتظر</b> ..
+      </div>
+      <div class="row">
+        <ng-container *ngFor="let message of response.data index as i">
+          <div class="col-lg-4 col-md-4 col-sm-12" style="padding: 5px!important" >
+            <div class="message-item w3-round w3-white shadow w3-padding w3-display-container" >
+              <div class="w3-block w3-xxlarge message-content" [innerHTML]="message.message" >
+
+              </div>
+
+              <div class="w3-display-topleft w3-padding">
+                <i class="fa fa-qrcode w3-jumbo w3-text-teal"></i>
+              </div>
+
+              <div class="w3-display-bottomleft w3-padding">
+                <button class="fa fa-edit xmini-avatar btn w3-teal" (click)="edit(message)" style="margin: 3px"></button>
+                <button class="fa fa-trash xmini-avatar btn w3-red" (click)="destroy(message)" style="margin: 3px"></button>
+                <button class="fa fa-clone xmini-avatar btn w3-teal" (click)="copyMessage(message)" style="margin: 3px"></button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<app-customer-add [reload]="reload" [customers]="[]" ></app-customer-add>
+
+
+<app-message-form [resource]="resource" [reload]="reload" ></app-message-form>

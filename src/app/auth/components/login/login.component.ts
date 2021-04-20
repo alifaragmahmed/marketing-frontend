@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
           Cache.set(AuthService.API_TOKEN_PRFIX, data.data.api_token);
 
           // start autoloader
-          window.location.href = "/dashboard";
+          window.location.href = "/";
           /*setTimeout(() => {
             Autoloader.autoload(this.service);
           }, 1000);*/

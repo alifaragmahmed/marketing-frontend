@@ -1,13 +1,9 @@
 <div class="login-box">
     <!-- /.login-logo -->
-    <div class="login-box-body material-shadow w3-animate-zoom">
+    <div class="login-box-body material-shadow w3-animate-zoom w3-round">
       <div class="login-logo w3-animate-top">
-        <img src="/assets/img/logo.png" alt="" style="width: 90px" >
-        <br>
-        <a href="#" class="w3-text-gray text-capitalize w3-xxxlarge w3-text-dark" ><b> {{ "UFS" | trans }}  </b></a>
+        <a href="#" class="w3-text-gray text-capitalize w3-xxxlarge w3-text-dark" ><b> مسوق  </b></a>
       </div>
-      <p class="login-box-msg"><b>{{ 'login with account' | trans }}</b></p>
-
         <div class="form-group has-feedback">
           <input type="text" class="form-control" [(ngModel)]="userAuth.username" placeholder="{{ 'username' | trans }}">
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -19,22 +15,12 @@
           placeholder="{{ 'password' | trans }}">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
-        <div class="row">
-          <div class="col-xs-8">
-            <div class="checkbox icheck">
-              <!--
-              <label class="">
-                <div class="icheckbox_square-blue" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="checkbox" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                Remember Me
-              </label>
-              -->
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-xs-4">
-            <button type="button" (click)="login()" [disabled]="isSubmitted" class="btn btn-primary btn-block btn-flat">{{ 'Sign In' | trans }}</button>
-          </div>
-          <!-- /.col -->
+
+        <div class="w3-center">
+          <button type="button"
+          mat-raised-button
+          (click)="login()"
+          [disabled]="isSubmitted" class="btn w3-teal btn-block btn-flat">تسجيل الدخول</button>
         </div>
 
       <!-- /.social-auth-links

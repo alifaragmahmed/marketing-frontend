@@ -16,6 +16,7 @@ export class CustomerIndexComponent extends Crud implements OnInit, AfterViewIni
   $: any = $;
   categories: any = [];
   status: any = [];
+  messages: any = [];
 
   selectedCategory: HashTable<any, any> = new HashTable<any, any>();
   selectedStatus: HashTable<any, any> = new HashTable<any, any>();
@@ -55,10 +56,17 @@ export class CustomerIndexComponent extends Crud implements OnInit, AfterViewIni
     });
   }
 
+  loadMessages() {
+    this.service.get("messages").subscribe((res: any) => {
+      this.messages = res.data;
+    });
+  }
+
   ngOnInit(): void {
     this.get(true);
     this.loadCategory();
     this.loadStatus();
+    this.loadMessages();
   }
 
   ngAfterViewInit() {
@@ -137,6 +145,15 @@ export class CustomerIndexComponent extends Crud implements OnInit, AfterViewIni
       this.filter.page_length = value;
       this.get();
     }
+  }
+
+  sendMail() {
+    this.$('#selectMessageModal').modal('show');
+  }
+
+  sort(col) {
+    this.filter.sort = col;
+    this.get(true);
   }
 
 

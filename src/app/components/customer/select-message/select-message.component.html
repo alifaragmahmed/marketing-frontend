@@ -1,0 +1,49 @@
+<div class="modal fade" id="selectMessageModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content light-gray">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">ارسل رسالة</h4>
+      </div>
+      <div class="modal-body" *ngIf="!isSubmit" style="height: 500px;overflow: auto;" >
+        <div class="row">
+          <ng-container *ngFor="let item of messages index as i">
+            <div class="col-lg-4 col-md-4 col-sm-12" style="padding: 5px!important" (click)="select(item)" >
+              <div class="message-item w3-round shadow w3-padding w3-display-container" >
+                <div class="w3-block w3-xxlarge message-content" [innerHTML]="item.message" >
+
+                </div>
+
+                <div class="w3-display-topleft w3-padding" *ngIf="message.id == item.id" >
+                  <i class="fa fa-check-circle w3-text-teal w3-xlarge w3-animate-zoom"></i>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
+      <div class="modal-body w3-center w3-padding" *ngIf="isSubmit" >
+        <i class="fa fa-spin fa-spinner w3-large w3-text-teal"></i>
+      </div>
+      <div class="modal-footer">
+        <button
+        type="button"
+        style="margin: 3px"
+        mat-raised-button
+        class="btn btn-default" data-dismiss="modal">اعلاق</button>
+
+        <button
+        *ngIf="message.id"
+        type="button"
+        style="margin: 3px"
+        [disabled]="isSubmit"
+        (click)="sendMessage()"
+        mat-raised-button class="w3-teal">
+          <span *ngIf="!isSubmit" >أرسال</span>
+          <span *ngIf="isSubmit" class="fa fa-spin fa-spinner" ></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -363,7 +363,7 @@ export class Crud {
    * @param data
    * @param index of item in array
    */
-  destroy(data, index=0, action=null) {
+  destroy(data, index=0, action=this.reload) {
     return this.removeInstance.destroy(data, index, action);
   }
 

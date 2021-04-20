@@ -1,11 +1,8 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, Input, OnInit } from '@angular/core';
 import { Request } from 'src/app/shared/request';
 import { Crud } from '../../../shared/helpers/crud';
 import { GlobalService } from '../../../shared/services/global.service';
 import { Message } from '../../../shared/message';
-import { Helper } from '../../../shared/helper';
-import { Config } from '../../../helpers/config';
 
 @Component({
   selector: 'app-customer-add',

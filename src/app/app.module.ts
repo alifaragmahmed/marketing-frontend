@@ -32,6 +32,11 @@ import { CustomerItemComponent } from './components/customer/customer-item/custo
 import { CustomerAddComponent } from './components/customer/customer-add/customer-add.component';
 import { CategoryComponent } from './components/category/category.component';
 import { StatusComponent } from './components/status/status.component';
+import { MessageIndexComponent } from './components/message/message-index/message-index.component';
+import { MessageFormComponent } from './components/message/message-form/message-form.component';
+import { SelectMessageComponent } from './components/customer/select-message/select-message.component';
+import { SendWhatsappMessageComponent } from './components/customer/send-whatsapp-message/send-whatsapp-message.component';
+import { MatSlideToggleModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,11 @@ import { StatusComponent } from './components/status/status.component';
     CustomerItemComponent,
     CustomerAddComponent,
     CategoryComponent,
-    StatusComponent
+    StatusComponent,
+    MessageIndexComponent,
+    MessageFormComponent,
+    SelectMessageComponent,
+    SendWhatsappMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +67,7 @@ import { StatusComponent } from './components/status/status.component';
     MatSortModule,
     MatCheckboxModule,
     MatButtonModule,
+    MatSlideToggleModule
   ],
   providers: [
     httpInterceptorProviders,

@@ -1,7 +1,7 @@
 
 
 <div
-class="w3-block shadow w3-round w3-padding customer-item w3-display-container {{ customer.selected? 'w3-light-gray' : 'w3-white' }}"
+class="w3-block w3-round w3-padding customer-item w3-display-container {{ customer.selected? 'w3-light-gray' : 'w3-white' }}"
 (mouseover)="mouseHover($event)"
 style="margin-bottom: 3px;" >
   <div class="media w3-display-container" style="width: 90%" >
@@ -9,7 +9,7 @@ style="margin-bottom: 3px;" >
       <a href="#">
 
         <button
-        class="w3-circle avatar w3-xxlarge btn w3-teal"
+        class="w3-circle avatar w3-xxlarge btn {{ color }}"
         style="background-size: cover;"
         [style.backgroundImage]="'url('+customer.image+')'"  >
           <span *ngIf="!customer.selected" >{{ customer.name.substring(0,1) }}</span>
@@ -20,12 +20,9 @@ style="margin-bottom: 3px;" >
       </a>
     </div>
     <div class="media-body w3-display-container">
-      <div class="media-heading w3-xlarge">{{ customer.name }}</div>
-
-      <b class="w3-text-teal" >{{ customer.category? customer.category.name : "" }}</b>
-      <br>
-      <a href="#" (click)="toggleMoreDetail()" >
-        <b class="w3-text-blue" >المزيد</b>
+      <div class="media-heading w3-large">{{ customer.name }}</div>
+      <a href="#" (click)="toggleMoreDetail()" class="w3-text-teal" >
+        <b class="w3-text-blue" >{{ customer.category? customer.category.name : "" }}</b>
       </a>
 
       <br>
@@ -50,11 +47,9 @@ style="margin-bottom: 3px;" >
 
     <div class="w3-display-topleft">
 
-      <button *ngIf="customer.email" class="fa fa-envelope mini-avatar shadow btn w3-indigo"></button>
+      <button *ngIf="customer.whatsapp" (click)="sendWhatsapp()" class="fa fa-whatsapp xmini-avatar shadow btn w3-green"></button>
 
-      <button *ngIf="customer.whatsapp" (click)="sendWhatsapp()" class="fa fa-whatsapp mini-avatar shadow btn w3-green"></button>
-
-      <button *ngIf="customer.phone" (click)="call()" class="fa fa-phone mini-avatar shadow btn w3-teal"></button>
+      <button *ngIf="customer.phone" (click)="call()" class="fa fa-phone xmini-avatar shadow btn w3-teal"></button>
 
     </div>
   </div>
@@ -67,3 +62,5 @@ style="margin-bottom: 3px;" >
 
 
 <app-customer-add [reload]="reload" [customers]="[customer]" [categories]="categories" [status]="status"  ></app-customer-add>
+
+<app-send-whatsapp-message [customer]="customer" [messages]="messages" ></app-send-whatsapp-message>

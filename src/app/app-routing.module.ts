@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './core/layout.component';
 import { AuthGuardService } from './shared/middlewares/auth-guard.service';
 import { CustomerIndexComponent } from './components/customer/customer-index/customer-index.component';
+import { MessageIndexComponent } from './components/message/message-index/message-index.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: '',
         component: CustomerIndexComponent
+      },
+      {
+        path: 'message',
+        component: MessageIndexComponent
       },
     ]
   },
